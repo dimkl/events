@@ -1,0 +1,16 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "lib": ["es6", "dom"],
+      "pretty": true,
+      "strict": true,
+      "target": "ES2019",
+      "noErrorTruncation": true,
+      "experimentalDecorators": true,
+      "outDir": "./dist/",
+      "moduleResolution": "node"
+    },
+    "exclude": ["node_modules", "dist"],
+    "ts-node": {"esm": true}
+  }
+  
