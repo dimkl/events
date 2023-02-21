@@ -1,0 +1,74 @@
+import {
+  CustomEvent,
+  dispatchEventOn,
+  dispatchEventOnAsync,
+  attachEventOn,
+} from "../src";
+
+//
+// Definition example
+//
+const eventBus = new EventTarget();
+
+class Person {
+  public firstName: string;
+  public lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  @dispatchEventOn()
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  @dispatchEventOn()
+  sayAloha() {
+    console.log("said: ", this.aloha());
+  }
+
+  @dispatchEventOnAsync()
+  async asyncGetFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  aloha() {
+    return "Aloha to all";
+  }
+}
+
+//
+// Implicit tasks definition
+// Requires class name to be ${namespace}Handler
+// and the methods to be static type with ${event} name
+//
+class PersonHandler {
+  @attachEventOn()
+  static getFullName(event: CustomEvent) {
+    console.log("ImplicitPersonHandler: event listener for getFullName: ", event.data);
+  }
+
+  @attachEventOn()
+  static sayAloha(event: CustomEvent) {
+    console.log("ImplicitPersonHandler: event listener for sayAloha: ", event.data);
+  }
+
+  @attachEventOn()
+  static asyncGetFullName(event: CustomEvent) {
+    console.log(
+      "ImplicitPersonHandler: event listener for asyncGetFullName: ",
+      event.data
+    );
+  }
+}
+
+const p = new Person("Firstname", "Lastname");
+
+p.asyncGetFullName();
+
+console.log("log getFullName(): ", p.getFullName());
+p.sayAloha();
+p.firstName = "Firstname";
+console.log("log getFullName(): ", p.getFullName());

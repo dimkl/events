@@ -1,76 +1,97 @@
-export class CustomEvent extends Event {
-    data: any;
+const gloablEventBus = new EventTarget();
 
-    constructor(type: string, options?: any) {
-        const { data, ...opts } = options || {};
-        super(type, opts);
-        this.data = data;
-    }
-}
-//
-// Implementation v1 (without result of method)
-//
-// function dispatchEventOn(eventBus: EventTarget, eventName?: string) {
-//     return function (target: any, propertyKey: string, _descriptor: PropertyDescriptor) {
-//         eventName ||= target.constructor.name.toLowerCase();
-//         eventBus.dispatchEvent(new ClerkEvent(`${eventName}:${propertyKey}`))
-//     };
-// }
+export class CustomEvent<TData = any> extends Event {
+  data: TData;
 
-//
-// Implementation v2 (with method result)
-//
-export const dispatchEventOn = (eventBus: EventTarget, eventName?: string) => {
-    return (target: any, propertyKey: string, propertyDescriptor: PropertyDescriptor) => {
-        eventName ||= target.constructor.name.toLowerCase();
-
-        return {
-            get() {
-                const wrapperFn = (...args: any[]): any => {
-                    const result = propertyDescriptor.value.apply(this, args)
-                    eventBus.dispatchEvent(new CustomEvent(`${eventName}:${propertyKey}`, { data: result }))
-                    return result;
-                }
-
-                Object.defineProperty(this, propertyKey, {
-                    value: wrapperFn,
-                    configurable: true,
-                    writable: true
-                });
-
-                return wrapperFn;
-            }
-        }
-    }
+  constructor(type: string, options?: any) {
+    const { data, ...opts } = options || {};
+    super(type, opts);
+    this.data = data;
+  }
 }
 
-export const dispatchEventOnAsync = (eventBus: EventTarget, eventName?: string) => {
-    return (target: any, propertyKey: string, propertyDescriptor: PropertyDescriptor) => {
-        eventName ||= target.constructor.name.toLowerCase();
+export const dispatchEventOn = (
+  eventName?: string,
+  eventBus: EventTarget = gloablEventBus
+) => {
+  return (
+    target: any,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor
+  ) => {
+    const namespace = target.constructor.name.toLowerCase();
+    const event = eventName || `${namespace}:${propertyKey}`;
 
-        return {
-            get() {
-                const wrapperFn = async (...args: any[]): Promise<any> => {
-                    const result = await propertyDescriptor.value.apply(this, args)
-                    eventBus.dispatchEvent(new CustomEvent(`${eventName}:${propertyKey}`, { data: result }));
-                    return result;
-                }
+    return {
+      get() {
+        const wrapperFn = (...args: any[]): any => {
+          const result = propertyDescriptor.value.apply(this, args);
+          Promise.resolve().then(() => {
+            eventBus.dispatchEvent(new CustomEvent(event, { data: result }));
+          });
+          return result;
+        };
 
-                Object.defineProperty(this, propertyKey, {
-                    value: wrapperFn,
-                    configurable: true,
-                    writable: true
-                });
+        Object.defineProperty(this, propertyKey, {
+          value: wrapperFn,
+          configurable: true,
+          writable: true,
+        });
 
-                return wrapperFn;
-            }
-        }
-    }
-}
+        return wrapperFn;
+      },
+    };
+  };
+};
 
-export const attachEventOn = (eventBus: EventTarget, eventName: string) => {
-    return (target: any, _propertyKey: string, propertyDescriptor: PropertyDescriptor) => {
-        eventName ||= target.constructor.name.toLowerCase();
-        eventBus.addEventListener(eventName, propertyDescriptor.value);
-    }
-}
+export const dispatchEventOnAsync = (
+  eventName?: string,
+  eventBus: EventTarget = gloablEventBus
+) => {
+  return (
+    target: any,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor
+  ) => {
+    const namespace = target.constructor.name.toLowerCase();
+    const event = eventName || `${namespace}:${propertyKey}`;
+
+    return {
+      get() {
+        const wrapperFn = async (...args: any[]): Promise<any> => {
+          const result = await propertyDescriptor.value.apply(this, args);
+          Promise.resolve().then(() => {
+            eventBus.dispatchEvent(new CustomEvent(event, { data: result }));
+          });
+          return result;
+        };
+
+        Object.defineProperty(this, propertyKey, {
+          value: wrapperFn,
+          configurable: true,
+          writable: true,
+        });
+
+        return wrapperFn;
+      },
+    };
+  };
+};
+
+export const attachEventOn = (
+  eventName?: string,
+  eventBus: EventTarget = gloablEventBus
+) => {
+  return (
+    target: any,
+    propertyKey: string,
+    propertyDescriptor: PropertyDescriptor
+  ) => {
+    const namespace = target.name.replace(/Handler/, "").toLowerCase();
+    const event = eventName || `${namespace}:${propertyKey}`;
+
+    eventBus.addEventListener(event, propertyDescriptor.value);
+  };
+};
+
+export const eventBus = gloablEventBus;
