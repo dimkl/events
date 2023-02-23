@@ -1,9 +1,4 @@
-import {
-  CustomEvent,
-  dispatch,
-  dispatchAsync,
-  on,
-} from "../src";
+import { CustomEvent, dispatch, on } from "../src";
 
 //
 // Definition example
@@ -29,7 +24,7 @@ class IsolatedPerson {
     console.log("Isolated said: ", this.aloha());
   }
 
-  @dispatchAsync({ eventName: "person:asyncGetFullName", eventBus })
+  @dispatch({ eventName: "person:asyncGetFullName", eventBus })
   async asyncGetFullName() {
     return `Isolated ${this.firstName} ${this.lastName}`;
   }

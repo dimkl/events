@@ -1,9 +1,4 @@
-import {
-  CustomEvent,
-  dispatch,
-  on,
-  dispatchAsync,
-} from "../src";
+import { CustomEvent, dispatch, on } from "../src";
 
 //
 // Definition example
@@ -28,12 +23,16 @@ class Person {
     console.log("said: ", this.aloha());
   }
 
-  @dispatchAsync()
+  @dispatch()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
   aloha() {
+    return "Aloha to all";
+  }
+  @dispatch()
+  async alohaAsync() {
     return "Aloha to all";
   }
 }
@@ -75,3 +74,5 @@ console.log("log getFullName(): ", p.getFullName());
 p.sayAloha();
 p.firstName = "Fistname2";
 console.log("log getFullName(): ", p.getFullName());
+
+p.alohaAsync();

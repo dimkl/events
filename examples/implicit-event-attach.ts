@@ -1,9 +1,4 @@
-import {
-  CustomEvent,
-  dispatch,
-  dispatchAsync,
-  on,
-} from "../src";
+import { CustomEvent, dispatch, on } from "../src";
 
 //
 // Definition example
@@ -28,7 +23,7 @@ class Person {
     console.log("said: ", this.aloha());
   }
 
-  @dispatchAsync()
+  @dispatch()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -46,12 +41,18 @@ class Person {
 class PersonHandler {
   @on()
   static getFullName(event: CustomEvent) {
-    console.log("ImplicitPersonHandler: event listener for getFullName: ", event.data);
+    console.log(
+      "ImplicitPersonHandler: event listener for getFullName: ",
+      event.data
+    );
   }
 
   @on()
   static sayAloha(event: CustomEvent) {
-    console.log("ImplicitPersonHandler: event listener for sayAloha: ", event.data);
+    console.log(
+      "ImplicitPersonHandler: event listener for sayAloha: ",
+      event.data
+    );
   }
 
   @on()

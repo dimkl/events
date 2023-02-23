@@ -40,44 +40,10 @@ export const dispatch = ({
 
     return {
       get() {
-        const wrapperFn = (...args: any[]): any => {
+        const wrapperFn = (...args: any[]): typeof propertyDescriptor.value => {
           const result = propertyDescriptor.value.apply(this, args);
-          Promise.resolve().then(() => {
-            eventBus.dispatchEvent(new CustomEvent(event, { data: result }));
-          });
-          return result;
-        };
-
-        Object.defineProperty(this, propertyKey, {
-          value: wrapperFn,
-          configurable: true,
-          writable: true,
-        });
-
-        return wrapperFn;
-      },
-    };
-  };
-};
-
-export const dispatchAsync = ({
-  eventName,
-  eventBus = globalEventBus,
-}: DispatchParams = {}) => {
-  return (
-    target: any,
-    propertyKey: string,
-    propertyDescriptor: PropertyDescriptor
-  ) => {
-    const namespace = target.constructor.name.toLowerCase();
-    const event = eventName || `${namespace}:${propertyKey}`;
-
-    return {
-      get() {
-        const wrapperFn = async (...args: any[]): Promise<any> => {
-          const result = await propertyDescriptor.value.apply(this, args);
-          Promise.resolve().then(() => {
-            eventBus.dispatchEvent(new CustomEvent(event, { data: result }));
+          Promise.resolve(result).then((data) => {
+            eventBus.dispatchEvent(new CustomEvent(event, { data }));
           });
           return result;
         };

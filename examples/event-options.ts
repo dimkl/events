@@ -1,9 +1,4 @@
-import {
-  CustomEvent,
-  dispatch,
-  on,
-  dispatchAsync,
-} from "../src";
+import { CustomEvent, dispatch, on } from "../src";
 
 //
 // Definition example
@@ -33,7 +28,7 @@ class Person {
     console.log("said2: ", this.aloha());
   }
 
-  @dispatchAsync()
+  @dispatch()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -88,7 +83,9 @@ const intervalFn = setInterval(() => {
   if (counter == 5) clearInterval(intervalFn);
 }, 200);
 
-console.log("getFullName debounce should be called once for 5 * 100ms interval");
+console.log(
+  "getFullName debounce should be called once for 5 * 100ms interval"
+);
 let counter2 = 0;
 const intervalFn2 = setInterval(() => {
   console.log("getFullName debounce ", counter2);
