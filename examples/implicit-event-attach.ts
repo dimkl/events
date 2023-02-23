@@ -8,7 +8,6 @@ import {
 //
 // Definition example
 //
-const eventBus = new EventTarget();
 
 class Person {
   public firstName: string;
@@ -63,6 +62,10 @@ class PersonHandler {
     );
   }
 }
+
+console.log(`
+---- Implicit event attach example ----
+`);
 
 const p = new Person("Firstname", "Lastname");
 

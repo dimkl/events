@@ -39,22 +39,34 @@ class Person {
 }
 
 class ExplicitPersonHandler {
-  @attachEventOn("person:getFullName")
+  @attachEventOn({ eventName: "person:getFullName" })
   static handleGetFullName(event: CustomEvent) {
-    console.log("ExplicitPersonHandler: event listener for getFullName: ", event.data);
+    console.log(
+      "ExplicitPersonHandler: event listener for getFullName: ",
+      event.data
+    );
   }
 
-  @attachEventOn("person:sayAloha")
+  @attachEventOn({ eventName: "person:sayAloha" })
   static handleSayAloha(event: CustomEvent) {
-    console.log("ExplicitPersonHandler: event listener for sayAloha: ", event.data);
+    console.log(
+      "ExplicitPersonHandler: event listener for sayAloha: ",
+      event.data
+    );
   }
 
-  @attachEventOn("person:asyncGetFullName")
+  @attachEventOn({ eventName: "person:asyncGetFullName" })
   static handleAsyncGetFullName(event: CustomEvent) {
-    console.log("ExplicitPersonHandler: event listener for asyncGetFullName: ", event.data);
+    console.log(
+      "ExplicitPersonHandler: event listener for asyncGetFullName: ",
+      event.data
+    );
   }
 }
 
+console.log(`
+---- Minimal example ----
+`);
 const p = new Person("Fistname", "Lastname");
 
 p.asyncGetFullName();

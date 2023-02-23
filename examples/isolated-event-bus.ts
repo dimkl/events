@@ -19,17 +19,17 @@ class IsolatedPerson {
     this.lastName = lastName;
   }
 
-  @dispatchEventOn("person:getFullName", eventBus)
+  @dispatchEventOn({ eventName: "person:getFullName", eventBus })
   getFullName() {
     return `Isolated ${this.firstName} ${this.lastName}`;
   }
 
-  @dispatchEventOn("person:sayAloha", eventBus)
+  @dispatchEventOn({ eventName: "person:sayAloha", eventBus })
   sayAloha() {
     console.log("Isolated said: ", this.aloha());
   }
 
-  @dispatchEventOnAsync("person:asyncGetFullName", eventBus)
+  @dispatchEventOnAsync({ eventName: "person:asyncGetFullName", eventBus })
   async asyncGetFullName() {
     return `Isolated ${this.firstName} ${this.lastName}`;
   }
@@ -40,7 +40,7 @@ class IsolatedPerson {
 }
 
 class IsolatedPersonHandler {
-  @attachEventOn("person:getFullName", eventBus)
+  @attachEventOn({ eventName: "person:getFullName", eventBus })
   static handleGetFullName(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for getFullName: ",
@@ -48,7 +48,7 @@ class IsolatedPersonHandler {
     );
   }
 
-  @attachEventOn("person:sayAloha", eventBus)
+  @attachEventOn({ eventName: "person:sayAloha", eventBus })
   static handleSayAloha(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for sayAloha: ",
@@ -56,7 +56,7 @@ class IsolatedPersonHandler {
     );
   }
 
-  @attachEventOn("person:asyncGetFullName", eventBus)
+  @attachEventOn({ eventName: "person:asyncGetFullName", eventBus })
   static handleAsyncGetFullName(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for asyncGetFullName: ",
@@ -64,6 +64,10 @@ class IsolatedPersonHandler {
     );
   }
 }
+
+console.log(`
+---- Isolated event bus example ----
+`);
 
 const p = new IsolatedPerson("Firstname", "Lastname");
 

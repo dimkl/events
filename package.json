@@ -8,6 +8,7 @@
     "example:minimal": "ts-node examples/minimal.ts",
     "example:isolated": "ts-node examples/isolated-event-bus.ts",
     "example:implicit": "ts-node examples/implicit-event-attach.ts",
+    "example:options": "ts-node examples/event-options.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
