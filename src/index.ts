@@ -2,21 +2,19 @@ import { debounce } from "./utils";
 
 const globalEventBus = new EventTarget();
 
+type BaseParams = {
+  eventName?: string;
+  eventBus?: EventTarget;
+};
+
 type OnOptions = {
   once?: boolean;
   debounceMs?: number;
   errorHandler?: (err: Error) => void;
 };
 
-type OnParams = {
-  eventName?: string;
-  eventBus?: EventTarget;
-} & OnOptions;
-
-type DispatchParams = {
-  eventName?: string;
-  eventBus?: EventTarget;
-};
+type OnParams = BaseParams & OnOptions;
+type DispatchParams = BaseParams;
 
 export class CustomEvent<TData = any> extends Event {
   data: TData;
