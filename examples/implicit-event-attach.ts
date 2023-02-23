@@ -1,8 +1,8 @@
 import {
   CustomEvent,
-  dispatchEventOn,
-  dispatchEventOnAsync,
-  attachEventOn,
+  dispatch,
+  dispatchAsync,
+  on,
 } from "../src";
 
 //
@@ -18,17 +18,17 @@ class Person {
     this.lastName = lastName;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   sayAloha() {
     console.log("said: ", this.aloha());
   }
 
-  @dispatchEventOnAsync()
+  @dispatchAsync()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -44,17 +44,17 @@ class Person {
 // and the methods to be static type with ${event} name
 //
 class PersonHandler {
-  @attachEventOn()
+  @on()
   static getFullName(event: CustomEvent) {
     console.log("ImplicitPersonHandler: event listener for getFullName: ", event.data);
   }
 
-  @attachEventOn()
+  @on()
   static sayAloha(event: CustomEvent) {
     console.log("ImplicitPersonHandler: event listener for sayAloha: ", event.data);
   }
 
-  @attachEventOn()
+  @on()
   static asyncGetFullName(event: CustomEvent) {
     console.log(
       "ImplicitPersonHandler: event listener for asyncGetFullName: ",

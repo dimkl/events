@@ -2,18 +2,18 @@ import { debounce } from "./utils";
 
 const globalEventBus = new EventTarget();
 
-type AttachEventOptions = {
+type OnOptions = {
   once?: boolean;
   debounceMs?: number;
   errorHandler?: (err: Error) => void;
 };
 
-type AttachEventParams = {
+type OnParams = {
   eventName?: string;
   eventBus?: EventTarget;
-} & AttachEventOptions;
+} & OnOptions;
 
-type DispatchEventParams = {
+type DispatchParams = {
   eventName?: string;
   eventBus?: EventTarget;
 };
@@ -28,10 +28,10 @@ export class CustomEvent<TData = any> extends Event {
   }
 }
 
-export const dispatchEventOn = ({
+export const dispatch = ({
   eventName,
   eventBus = globalEventBus,
-}: DispatchEventParams = {}) => {
+}: DispatchParams = {}) => {
   return (
     target: any,
     propertyKey: string,
@@ -62,10 +62,10 @@ export const dispatchEventOn = ({
   };
 };
 
-export const dispatchEventOnAsync = ({
+export const dispatchAsync = ({
   eventName,
   eventBus = globalEventBus,
-}: DispatchEventParams = {}) => {
+}: DispatchParams = {}) => {
   return (
     target: any,
     propertyKey: string,
@@ -96,13 +96,13 @@ export const dispatchEventOnAsync = ({
   };
 };
 
-export const attachEventOn = ({
+export const on = ({
   eventName,
   eventBus = globalEventBus,
   errorHandler,
   once,
   debounceMs,
-}: AttachEventParams = {}) => {
+}: OnParams = {}) => {
   return (
     target: any,
     propertyKey: string,

@@ -1,8 +1,8 @@
 import {
   CustomEvent,
-  dispatchEventOn,
-  attachEventOn,
-  dispatchEventOnAsync,
+  dispatch,
+  on,
+  dispatchAsync,
 } from "../src";
 
 //
@@ -18,22 +18,22 @@ class Person {
     this.lastName = lastName;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   sayAloha() {
     console.log("said: ", this.aloha());
   }
 
-  @dispatchEventOn()
+  @dispatch()
   sayAloha2() {
     console.log("said2: ", this.aloha());
   }
 
-  @dispatchEventOnAsync()
+  @dispatchAsync()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -44,22 +44,22 @@ class Person {
 }
 
 class PersonHandler {
-  @attachEventOn({ debounceMs: 200 })
+  @on({ debounceMs: 200 })
   static getFullName(event: CustomEvent) {
     console.log("event listener for getFullName: ", event.data);
   }
 
-  @attachEventOn({ once: true, debounceMs: 100 })
+  @on({ once: true, debounceMs: 100 })
   static sayAloha(event: CustomEvent) {
     console.log("event listener for sayAloha: ", event.data);
   }
 
-  @attachEventOn({ once: true })
+  @on({ once: true })
   static asyncGetFullName(event: CustomEvent) {
     console.log("event listener for asyncGetFullName: ", event.data);
   }
 
-  @attachEventOn({
+  @on({
     eventName: "person:sayAloha2",
     errorHandler: console.error,
   })

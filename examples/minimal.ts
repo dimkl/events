@@ -1,8 +1,8 @@
 import {
   CustomEvent,
-  dispatchEventOn,
-  attachEventOn,
-  dispatchEventOnAsync,
+  dispatch,
+  on,
+  dispatchAsync,
 } from "../src";
 
 //
@@ -18,17 +18,17 @@ class Person {
     this.lastName = lastName;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @dispatchEventOn()
+  @dispatch()
   sayAloha() {
     console.log("said: ", this.aloha());
   }
 
-  @dispatchEventOnAsync()
+  @dispatchAsync()
   async asyncGetFullName() {
     return `${this.firstName} ${this.lastName}`;
   }
@@ -39,7 +39,7 @@ class Person {
 }
 
 class ExplicitPersonHandler {
-  @attachEventOn({ eventName: "person:getFullName" })
+  @on({ eventName: "person:getFullName" })
   static handleGetFullName(event: CustomEvent) {
     console.log(
       "ExplicitPersonHandler: event listener for getFullName: ",
@@ -47,7 +47,7 @@ class ExplicitPersonHandler {
     );
   }
 
-  @attachEventOn({ eventName: "person:sayAloha" })
+  @on({ eventName: "person:sayAloha" })
   static handleSayAloha(event: CustomEvent) {
     console.log(
       "ExplicitPersonHandler: event listener for sayAloha: ",
@@ -55,7 +55,7 @@ class ExplicitPersonHandler {
     );
   }
 
-  @attachEventOn({ eventName: "person:asyncGetFullName" })
+  @on({ eventName: "person:asyncGetFullName" })
   static handleAsyncGetFullName(event: CustomEvent) {
     console.log(
       "ExplicitPersonHandler: event listener for asyncGetFullName: ",

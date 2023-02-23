@@ -1,8 +1,8 @@
 import {
   CustomEvent,
-  dispatchEventOn,
-  dispatchEventOnAsync,
-  attachEventOn,
+  dispatch,
+  dispatchAsync,
+  on,
 } from "../src";
 
 //
@@ -19,17 +19,17 @@ class IsolatedPerson {
     this.lastName = lastName;
   }
 
-  @dispatchEventOn({ eventName: "person:getFullName", eventBus })
+  @dispatch({ eventName: "person:getFullName", eventBus })
   getFullName() {
     return `Isolated ${this.firstName} ${this.lastName}`;
   }
 
-  @dispatchEventOn({ eventName: "person:sayAloha", eventBus })
+  @dispatch({ eventName: "person:sayAloha", eventBus })
   sayAloha() {
     console.log("Isolated said: ", this.aloha());
   }
 
-  @dispatchEventOnAsync({ eventName: "person:asyncGetFullName", eventBus })
+  @dispatchAsync({ eventName: "person:asyncGetFullName", eventBus })
   async asyncGetFullName() {
     return `Isolated ${this.firstName} ${this.lastName}`;
   }
@@ -40,7 +40,7 @@ class IsolatedPerson {
 }
 
 class IsolatedPersonHandler {
-  @attachEventOn({ eventName: "person:getFullName", eventBus })
+  @on({ eventName: "person:getFullName", eventBus })
   static handleGetFullName(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for getFullName: ",
@@ -48,7 +48,7 @@ class IsolatedPersonHandler {
     );
   }
 
-  @attachEventOn({ eventName: "person:sayAloha", eventBus })
+  @on({ eventName: "person:sayAloha", eventBus })
   static handleSayAloha(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for sayAloha: ",
@@ -56,7 +56,7 @@ class IsolatedPersonHandler {
     );
   }
 
-  @attachEventOn({ eventName: "person:asyncGetFullName", eventBus })
+  @on({ eventName: "person:asyncGetFullName", eventBus })
   static handleAsyncGetFullName(event: CustomEvent) {
     console.log(
       "IsolatedPersonHandler: event listener for asyncGetFullName: ",
