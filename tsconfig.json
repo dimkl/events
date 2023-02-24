@@ -10,7 +10,7 @@
       "outDir": "./dist/",
       "moduleResolution": "node"
     },
-    "exclude": ["node_modules", "dist"],
+    "files": ["./index.ts"],
     "ts-node": {"esm": true}
   }
   
