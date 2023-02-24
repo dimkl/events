@@ -8,9 +8,12 @@
       "noErrorTruncation": true,
       "experimentalDecorators": true,
       "outDir": "./dist/",
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "forceConsistentCasingInFileNames": true,    
+      "declaration": true,                          
+      "sourceMap": true,
     },
-    "files": ["./index.ts"],
+    "include": ["src/"],
     "ts-node": {"esm": true}
   }
   
