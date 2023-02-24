@@ -1,4 +1,5 @@
-import { CustomEvent, dispatch, on } from "../src";
+import { CustomEvent, dispatch, on } from "@dimkl/events";
+// import { CustomEvent, dispatch, on } from "../src";
 
 //
 // Definition example
