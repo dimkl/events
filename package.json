@@ -3,6 +3,9 @@
   "version": "1.2.0",
   "description": "Minimal events register library",
   "main": "dist/src/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "npm run build",
