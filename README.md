@@ -1,6 +1,6 @@
 # Events
 
-`@dimkl/events` is a JS library for listening and dispatching events on class methods.
+`@dimkl/events` is a **dependency-free** JS library for listening & dispatching events on class methods.
 
 ## Installation
 
@@ -10,6 +10,11 @@ Use the package manager [npm](https://nodejs.org/en/download/) to install `@dimk
 npm install @dimkl/events
 ```
 
+## Requirements & limitations
+
+- node >= 16
+- typescript decorators support enabled in tsconfig using `"experimentalDecorators": true`
+
 ## Usage
 
 Examples can be found in `examples/` folder:
@@ -18,6 +23,26 @@ Examples can be found in `examples/` folder:
 - [Implcit event attachment example](./examples/impplicit-event-attach.ts)
 - [Isolated event bus example](./examples/isolated-event-bus.ts)
 - [Minimal implicit event attachment (with options) example](./examples/event-options.ts)
+
+## Support
+For feature request or issues contact me via [email](mailto:admin@w3schools.io) or open an issue in repo
+
+## Roadmap
+
+- [ ] Add tests & code coverage
+- [ ] Add .github/{PUBLISH|ISSUE|PULL_REQUEST}
+- [ ] Changelog & Github Releases
+- [ ] Isomorphic support
+- [ ] Code coverage shield
+- [ ] Features
+    - [ ] @on/dispatch on functions
+    - [ ] remove event(s) on eventBus
+    - [ ] inject events and add event types
+- [ ] Github action to publish (if test pass & coverage not affected)
+    - [ ] on chore -> patch
+    - [ ] on fix -> patch
+    - [ ] on feat -> minor
+    - [ ] on fix|feat with (BREAKING CHANGE) -> major
 
 ## Contributing
 

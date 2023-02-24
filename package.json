@@ -20,5 +20,12 @@
   },
   "engines": {
     "node": ">=16.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dimkl/events.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dimkl/events/issues"
   }
 }
