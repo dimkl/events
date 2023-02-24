@@ -1,6 +1,6 @@
 {
   "name": "@dimkl/events",
-  "version": "1.3.0-1",
+  "version": "1.3.0-2",
   "description": "Minimal events register library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
