@@ -1,4 +1,4 @@
-export const debounce = (func: Function, delayMs: number) => {
+export const debounce = (func: Function, durationMs: number) => {
   let timeoutId: null | ReturnType<typeof setTimeout> = null;
 
   return (...args: any[]) => {
@@ -8,6 +8,6 @@ export const debounce = (func: Function, delayMs: number) => {
 
     timeoutId = setTimeout(() => {
       func(...args);
-    }, delayMs);
+    }, durationMs);
   };
 };

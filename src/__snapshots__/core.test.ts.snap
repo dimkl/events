@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`core @on() listen events (implicitly) 1`] = `
+[
+  [
+    "example:eventA",
+    [Function],
+  ],
+  [
+    "example:eventB",
+    [Function],
+  ],
+  [
+    "exampleb:eventA",
+    [Function],
+  ],
+  [
+    "exampleb:eventB",
+    [Function],
+  ],
+]
+`;

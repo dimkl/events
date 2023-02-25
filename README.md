@@ -29,7 +29,7 @@ For feature request or issues contact me via [email](mailto:admin@w3schools.io) 
 
 ## Roadmap
 
-- [ ] Add tests & code coverage
+- [x] Add tests & code coverage
 - [ ] Add .github/{PUBLISH|ISSUE|PULL_REQUEST}
 - [ ] Changelog & Github Releases
 - [ ] Isomorphic support
