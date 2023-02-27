@@ -1,22 +1,128 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`core @on() listen event debounced 1`] = `
+[
+  [
+    "res example:eventB",
+  ],
+  [
+    "res example:eventB",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+  [
+    "res example:eventA",
+  ],
+  [
+    "res eventC",
+  ],
+  [
+    "res example:eventA",
+  ],
+  [
+    "res eventC",
+  ],
+]
+`;
+
+exports[`core @on() listen event errorHandler 1`] = `
+[
+  [
+    "res example:eventA",
+  ],
+]
+`;
+
+exports[`core @on() listen event errorHandler 2`] = `
+[
+  [
+    [Error: err example:eventB],
+  ],
+  [
+    [Error: err eventC],
+  ],
+]
+`;
+
+exports[`core @on() listen event on different eventBus 1`] = `
+[
+  [
+    "res example:eventB",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+]
+`;
+
+exports[`core @on() listen event on different eventBus 2`] = `
+[
+  [
+    "res eventA",
+  ],
+  [
+    "res exampleb:eventA",
+  ],
+]
+`;
+
+exports[`core @on() listen event once 1`] = `
+[
+  [
+    "res example:eventA",
+  ],
+  [
+    "res example:eventB",
+  ],
+  [
+    "res example:eventB",
+  ],
+  [
+    "res eventC",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+]
+`;
+
+exports[`core @on() listen events (explicitly) 1`] = `
+[
+  [
+    "res eventA",
+  ],
+  [
+    "res eventB",
+  ],
+  [
+    "res eventC",
+  ],
+  [
+    "res eventD",
+  ],
+]
+`;
+
 exports[`core @on() listen events (implicitly) 1`] = `
 [
   [
-    "example:eventA",
-    [Function],
+    "res example:eventA",
   ],
   [
-    "example:eventB",
-    [Function],
+    "res example:eventB",
   ],
   [
-    "exampleb:eventA",
-    [Function],
+    "res exampleb:eventA",
   ],
   [
-    "exampleb:eventB",
-    [Function],
+    "res exampleb:eventB",
   ],
 ]
 `;
