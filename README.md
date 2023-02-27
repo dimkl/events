@@ -43,6 +43,7 @@ For feature request or issues contact me via [email](mailto:admin@w3schools.io) 
     - [ ] on fix -> patch
     - [ ] on feat -> minor
     - [ ] on fix|feat with (BREAKING CHANGE) -> major
+- [] Support react-native (EventTarget is not supported)
 
 ## Contributing
 
