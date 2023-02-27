@@ -1,0 +1,6 @@
+FROM oven/bun:latest
+COPY package-lock.json package.json jest.config.js tsconfig.json ./
+RUN bun install
+COPY src/ src/
+ENTRYPOINT [ "bun", "test" ]
+

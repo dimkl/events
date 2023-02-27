@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  node16:
+    build:
+      dockerfile: Dockerfile.node16
+  node18:
+    build:
+      dockerfile: Dockerfile.node18
+  # bun:
+  #   build:
+  #     dockerfile: Dockerfile.bun
