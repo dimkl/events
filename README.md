@@ -25,7 +25,7 @@ Examples can be found in `examples/` folder:
 - [Minimal implicit event attachment (with options) example](./examples/event-options.ts)
 
 ## Support
-For feature request or issues contact me via [email](mailto:admin@w3schools.io) or open an issue in repo
+For feature request or issues contact me via [email](mailto:dimitris.klouvas@gmail.com) or open an issue in repo
 
 ## Roadmap
 
