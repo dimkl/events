@@ -26,21 +26,12 @@ Examples can be found in `examples/` folder:
 
 ## Testing
 
-![Coverage lines](./badges/badge-lines.svg)
-![Coverage functions](./badges/badge-functions.svg)
-![Coverage branches](./badges/badge-branches.svg)
-![Coverage statements](./badges/badge-statements.svg)
+[![codecov](https://codecov.io/gh/dimkl/events/branch/main/graph/badge.svg?token=VHYWTFBNHB)](https://codecov.io/gh/dimkl/events)
 
 ### Run tests
 
 ```
 npm test
-```
-
-### Generate / Updating badges
-
-```
-npx jest-coverage-badges --output "./badges"
 ```
 
 ## Support
