@@ -46,10 +46,17 @@ npx jest-coverage-badges --output "./badges"
 ## Support
 For feature request or issues contact me via [email](mailto:dimitris.klouvas@gmail.com) or open an issue in repo
 
+## Publish
+
+```
+npm version {patch|minor|major}
+npm publish
+```
+
 ## Roadmap
 
 - [x] Add tests & code coverage
-- [ ] Add .github/{PUBLISH|ISSUE|PULL_REQUEST}
+- [x] Add .github/{ISSUE|PULL_REQUEST}
 - [ ] Changelog & Github Releases
 - [ ] Isomorphic support
 - [x] Code coverage shield
