@@ -24,6 +24,25 @@ Examples can be found in `examples/` folder:
 - [Isolated event bus example](./examples/isolated-event-bus.ts)
 - [Minimal implicit event attachment (with options) example](./examples/event-options.ts)
 
+## Testing
+
+![Coverage lines](./badges/badge-lines.svg)
+![Coverage functions](./badges/badge-functions.svg)
+![Coverage branches](./badges/badge-branches.svg)
+![Coverage statements](./badges/badge-statements.svg)
+
+### Run tests
+
+```
+npm test
+```
+
+### Generate / Updating badges
+
+```
+npx jest-coverage-badges --output "./badges"
+```
+
 ## Support
 For feature request or issues contact me via [email](mailto:dimitris.klouvas@gmail.com) or open an issue in repo
 
@@ -33,7 +52,7 @@ For feature request or issues contact me via [email](mailto:dimitris.klouvas@gma
 - [ ] Add .github/{PUBLISH|ISSUE|PULL_REQUEST}
 - [ ] Changelog & Github Releases
 - [ ] Isomorphic support
-- [ ] Code coverage shield
+- [x] Code coverage shield
 - [ ] Features
     - [ ] @on/dispatch on functions
     - [ ] remove event(s) on eventBus

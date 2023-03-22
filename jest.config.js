@@ -4,4 +4,5 @@ module.exports = {
   testEnvironment: "node",
   collectCoverage: true,
   testPathIgnorePatterns: ["<rootDir>/dist/"],
+  coverageReporters: ["json-summary", "text", "lcov"],
 };
