@@ -169,9 +169,10 @@ describe("core", () => {
       expect(listenerSpy.mock.calls).toMatchSnapshot();
     });
 
-    test.skip("listen event errorHandler", async () => {
+    test("listen event errorHandler", async () => {
       const listenerSpy = jest.fn((_evt: string) => {});
       const errorHandlerSpy = jest.fn(() => {});
+      const errorSpy = jest.fn(() => {});
 
       class Example {
         @on({ errorHandler: errorHandlerSpy })
@@ -190,7 +191,6 @@ describe("core", () => {
         @on({ eventName: "eventC", errorHandler: errorHandlerSpy })
         static eventA() {
           throw new Error("err eventC");
-          listenerSpy("res eventC");
         }
 
         @on()
@@ -199,15 +199,20 @@ describe("core", () => {
         }
       }
 
+      globalEventBus.addEventListener("error", errorSpy);
       globalEventBus.dispatchEvent(new CustomEvent("example:eventA"));
       globalEventBus.dispatchEvent(new CustomEvent("example:eventB"));
       globalEventBus.dispatchEvent(new CustomEvent("eventC"));
-      await expect(() =>
-        globalEventBus.dispatchEvent(new CustomEvent("exampleerror:eventB"))
-      ).toThrow("err exampleerror:eventB");
+      globalEventBus.dispatchEvent(new CustomEvent("exampleerror:eventB"));
 
       expect(listenerSpy.mock.calls).toMatchSnapshot();
       expect(errorHandlerSpy.mock.calls).toMatchSnapshot();
+      expect(errorSpy).toBeCalledTimes(1);
+      expect(errorSpy.mock.calls[0]).toMatchObject([
+        {
+          data: expect.objectContaining({ message: "err exampleerror:eventB" }),
+        },
+      ]);
     });
 
     test("listen event on different eventBus", () => {

@@ -81,7 +81,7 @@ export const on = ({
         if (errorHandler) {
           errorHandler(err as Error);
         } else {
-          throw err;
+          eventBus.dispatchEvent(new CustomEvent("error", { data: err }));
         }
       }
     };
