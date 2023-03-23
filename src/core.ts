@@ -1,5 +1,6 @@
 import { debounce } from "./utils";
 import { globalEventBus } from "./eventBus";
+import { CustomEvent } from "./customEvent";
 
 type BaseParams = {
   eventName?: string;
@@ -14,16 +15,6 @@ type OnOptions = {
 
 type OnParams = BaseParams & OnOptions;
 type DispatchParams = BaseParams;
-
-export class CustomEvent<TData = any> extends Event {
-  data: TData;
-
-  constructor(type: string, options?: any) {
-    const { data, ...opts } = options || {};
-    super(type, opts);
-    this.data = data;
-  }
-}
 
 export const dispatch = ({
   eventName,
