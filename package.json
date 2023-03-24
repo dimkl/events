@@ -1,6 +1,6 @@
 {
   "name": "@dimkl/events",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "description": "Minimal events register library",
   "keywords": [
     "event",
