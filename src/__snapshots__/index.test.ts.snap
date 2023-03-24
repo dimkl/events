@@ -2,6 +2,7 @@
 
 exports[`index verified exports of module 1`] = `
 [
+  "CustomEvent",
   "on",
   "dispatch",
   "eventBus",
