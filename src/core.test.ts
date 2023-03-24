@@ -1,22 +1,8 @@
-import { on, dispatch, CustomEvent } from "./core";
+import { on, dispatch } from "./core";
 import { globalEventBus } from "./eventBus";
+import { CustomEvent } from "./customEvent";
 
 describe("core", () => {
-  describe("CustomEvent", () => {
-    test("extends Event", () => {
-      expect(new CustomEvent("eventName")).toBeInstanceOf(Event);
-    });
-
-    test("holds data", () => {
-      const c = new CustomEvent("eventName");
-      expect(c.data).toBeUndefined();
-
-      const data = { aloha: 1 };
-      const c2 = new CustomEvent("eventName", { data });
-      expect(c2.data).toMatchObject(data);
-    });
-  });
-
   describe("@on()", () => {
     test("listen events (implicitly)", () => {
       const listenerSpy = jest.fn((_evt: string) => {});
