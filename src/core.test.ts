@@ -5,7 +5,7 @@ import { CustomEvent } from "./customEvent";
 describe("core", () => {
   describe("@on()", () => {
     test("listen events (implicitly)", () => {
-      const listenerSpy = jest.fn((_evt: string) => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
         @on()
         static eventA() {
@@ -39,7 +39,7 @@ describe("core", () => {
     });
 
     test("listen events (explicitly)", () => {
-      const listenerSpy = jest.fn((_evt: string) => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
         @on({ eventName: "eventA" })
         static eventA() {
@@ -73,7 +73,7 @@ describe("core", () => {
     });
 
     test("listen event once", () => {
-      const listenerSpy = jest.fn((_evt: string) => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
         @on({ once: true })
         static eventA() {
@@ -111,7 +111,7 @@ describe("core", () => {
     });
 
     test("listen event debounced", async () => {
-      const listenerSpy = jest.fn((_evt: string) => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
         @on({ debounceMs: 1 })
         static eventA() {
@@ -156,9 +156,9 @@ describe("core", () => {
     });
 
     test("listen event errorHandler", async () => {
-      const listenerSpy = jest.fn((_evt: string) => {});
-      const errorHandlerSpy = jest.fn(() => {});
-      const errorSpy = jest.fn(() => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
+      const errorHandlerSpy = jest.fn(() => { });
+      const errorSpy = jest.fn(() => { });
 
       class Example {
         @on({ errorHandler: errorHandlerSpy })
@@ -204,7 +204,7 @@ describe("core", () => {
     test("listen event on different eventBus", () => {
       const eventBus = new EventTarget();
 
-      const listenerSpy = jest.fn((_evt: string) => {});
+      const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
         @on({ eventName: "eventA", eventBus })
         static eventA() {
@@ -245,6 +245,73 @@ describe("core", () => {
     });
 
     test.todo("listen event on debounced once with different eventBus");
+
+    test("listen events (on class)", () => {
+      const listenerSpy = jest.fn((_evt: string) => { });
+
+      @on()
+      class Example {
+        static eventA() {
+          listenerSpy("res example:eventA");
+        }
+
+        eventB() {
+          listenerSpy("res example:eventB");
+        }
+      }
+
+      @on()
+      class ExampleB {
+        eventA() {
+          listenerSpy("res exampleb:eventA");
+        }
+
+        static eventB() {
+          listenerSpy("res exampleb:eventB");
+        }
+      }
+
+      globalEventBus.dispatchEvent(new CustomEvent("example:eventA"));
+      globalEventBus.dispatchEvent(new CustomEvent("example:eventB"));
+      globalEventBus.dispatchEvent(new CustomEvent("exampleb:eventA"));
+      globalEventBus.dispatchEvent(new CustomEvent("exampleb:eventB"));
+
+      expect(listenerSpy.mock.calls).toMatchSnapshot();
+    });
+
+    test("listen events (on method)", () => {
+      const listenerSpy = jest.fn((_evt: string) => { });
+      class Example {
+        @on()
+        eventA() {
+          listenerSpy("res example:eventA");
+        }
+
+        @on()
+        eventB() {
+          listenerSpy("res example:eventB");
+        }
+      }
+
+      class ExampleB {
+        @on()
+        static eventA() {
+          listenerSpy("res exampleb:eventA");
+        }
+
+        @on()
+        static eventB() {
+          listenerSpy("res exampleb:eventB");
+        }
+      }
+
+      globalEventBus.dispatchEvent(new CustomEvent("example:eventA"));
+      globalEventBus.dispatchEvent(new CustomEvent("example:eventB"));
+      globalEventBus.dispatchEvent(new CustomEvent("exampleb:eventA"));
+      globalEventBus.dispatchEvent(new CustomEvent("exampleb:eventB"));
+
+      expect(listenerSpy.mock.calls).toMatchSnapshot();
+    });
   });
 
   describe("@dispatch()", () => {
@@ -413,6 +480,108 @@ describe("core", () => {
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res eventA" })],
         [expect.objectContaining({ data: "res exampleb:eventA" })],
+      ]);
+    });
+
+    test("dispatch events (on class)", async () => {
+      @dispatch()
+      class Example {
+        eventA() {
+          return "res example:eventA";
+        }
+
+        static eventB() {
+          return "res example:eventB";
+        }
+      }
+
+      @dispatch()
+      class ExampleB {
+        eventA() {
+          return "res exampleb:eventA";
+        }
+
+        eventB() {
+          return "res exampleb:eventB";
+        }
+      }
+
+      const dispatcherSpy = jest.fn();
+      globalEventBus.addEventListener("example:eventA", dispatcherSpy);
+      globalEventBus.addEventListener("example:eventB", dispatcherSpy);
+      globalEventBus.addEventListener("exampleb:eventA", dispatcherSpy);
+      globalEventBus.addEventListener("exampleb:eventB", dispatcherSpy);
+
+      expect(dispatcherSpy).not.toBeCalled();
+
+      const e = new Example();
+      e.eventA();
+      Example.eventB();
+      const eB = new ExampleB();
+      eB.eventA();
+      eB.eventB();
+
+      // wait for the Promise used in dispatching events
+      await new Promise((res) => setTimeout(res, 1));
+
+      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy.mock.calls).toMatchObject([
+        [expect.objectContaining({ data: "res example:eventA" })],
+        [expect.objectContaining({ data: "res example:eventB" })],
+        [expect.objectContaining({ data: "res exampleb:eventA" })],
+        [expect.objectContaining({ data: "res exampleb:eventB" })],
+      ]);
+    });
+
+    test("dispatch events (on static method)", async () => {
+      class Example {
+        @dispatch()
+        static eventA() {
+          return "res example:eventA";
+        }
+
+        @dispatch()
+        eventB() {
+          return "res example:eventB";
+        }
+      }
+
+      class ExampleB {
+        @dispatch()
+        static eventA() {
+          return "res exampleb:eventA";
+        }
+
+        @dispatch()
+        eventB() {
+          return "res exampleb:eventB";
+        }
+      }
+
+      const dispatcherSpy = jest.fn();
+      globalEventBus.addEventListener("example:eventA", dispatcherSpy);
+      globalEventBus.addEventListener("example:eventB", dispatcherSpy);
+      globalEventBus.addEventListener("exampleb:eventA", dispatcherSpy);
+      globalEventBus.addEventListener("exampleb:eventB", dispatcherSpy);
+
+      expect(dispatcherSpy).not.toBeCalled();
+
+      const e = new Example();
+      Example.eventA();
+      e.eventB();
+      const eB = new ExampleB();
+      ExampleB.eventA();
+      eB.eventB();
+
+      // wait for the Promise used in dispatching events
+      await new Promise((res) => setTimeout(res, 1));
+
+      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy.mock.calls).toMatchObject([
+        [expect.objectContaining({ data: "res example:eventA" })],
+        [expect.objectContaining({ data: "res example:eventB" })],
+        [expect.objectContaining({ data: "res exampleb:eventA" })],
+        [expect.objectContaining({ data: "res exampleb:eventB" })],
       ]);
     });
   });

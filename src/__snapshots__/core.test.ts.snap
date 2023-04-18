@@ -126,3 +126,37 @@ exports[`core @on() listen events (implicitly) 1`] = `
   ],
 ]
 `;
+
+exports[`core @on() listen events (on class) 1`] = `
+[
+  [
+    "res example:eventA",
+  ],
+  [
+    "res example:eventB",
+  ],
+  [
+    "res exampleb:eventA",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+]
+`;
+
+exports[`core @on() listen events (on method) 1`] = `
+[
+  [
+    "res example:eventA",
+  ],
+  [
+    "res example:eventB",
+  ],
+  [
+    "res exampleb:eventA",
+  ],
+  [
+    "res exampleb:eventB",
+  ],
+]
+`;
