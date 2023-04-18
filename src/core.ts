@@ -179,6 +179,7 @@ const updateDescriptors = (
       target,
       methodName
     );
+    /* istanbul ignore next */
     if (!propertyDescriptor) return;
 
     target[methodName] = handler(target, methodName, propertyDescriptor);
