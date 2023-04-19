@@ -106,18 +106,16 @@ export const on = ({
           eventBus.dispatchEvent(new CustomEvent("error", { data: err }));
         }
       }
+
+      if (once) {
+        eventBus.removeEventListener(event, eventHandler);
+      }
     };
 
     if (debounceMs) {
       eventHandler = debounce(eventHandler, debounceMs);
     }
     eventBus.addEventListener(event, eventHandler);
-
-    if (once) {
-      eventBus.addEventListener(event, () => {
-        eventBus.removeEventListener(event, eventHandler);
-      });
-    }
   };
 
   const returnFn: DecoratorReturnFnType = (target, propertyKey, descriptor) => {
