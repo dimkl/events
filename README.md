@@ -52,7 +52,9 @@ npm publish
 - [ ] Isomorphic support
 - [x] Code coverage shield
 - [ ] Features
-    - [ ] @on/dispatch on functions
+    - [-] @on/dispatch on functions -- not possible
+    - [x] @on/dispatch on class
+    - [x] @on/dispatch for static & instance methods
     - [ ] remove event(s) on eventBus
     - [ ] inject events and add event types
 - [ ] Github action to publish (if test pass & coverage not affected)
@@ -60,7 +62,7 @@ npm publish
     - [ ] on fix -> patch
     - [ ] on feat -> minor
     - [ ] on fix|feat with (BREAKING CHANGE) -> major
-- [] Support react-native (EventTarget is not supported)
+- [ ] Support react-native (EventTarget is not supported)
 
 ## Contributing
 
