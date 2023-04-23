@@ -1,4 +1,5 @@
 import { debounce } from "./utils";
+import type { IEventBus } from "./eventBus";
 import { globalEventBus } from "./eventBus";
 import { CustomEvent } from "./customEvent";
 
@@ -16,7 +17,7 @@ type DecoratorReturnFnType = (
 
 type BaseParams = {
   eventName?: string;
-  eventBus?: EventTarget;
+  eventBus?: IEventBus;
 };
 
 type OnOptions = {

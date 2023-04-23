@@ -1,9 +1,14 @@
-export class CustomEvent<TData = any> extends Event {
-  data: TData;
+export interface IEvent {
+  type: string
+  data?: any
+}
+export class CustomEvent<TData = any> implements IEvent {
+  readonly data?: TData;
+  readonly type: string;
 
-  constructor(type: string, options?: any) {
-    const { data, ...opts } = options || {};
-    super(type, opts);
+  constructor(type: string, options?: { data: TData }) {
+    const { data } = options || {};
+    this.type = type;
     this.data = data;
   }
 }

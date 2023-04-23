@@ -1,5 +1,5 @@
 import { on, dispatch } from "./core";
-import { globalEventBus } from "./eventBus";
+import { EventBus, globalEventBus } from "./eventBus";
 import { CustomEvent } from "./customEvent";
 
 describe("core", () => {
@@ -202,7 +202,7 @@ describe("core", () => {
     });
 
     test("listen event on different eventBus", () => {
-      const eventBus = new EventTarget();
+      const eventBus = new EventBus();
 
       const listenerSpy = jest.fn((_evt: string) => { });
       class Example {
@@ -420,7 +420,7 @@ describe("core", () => {
     });
 
     test("dispatch event on different eventBus", async () => {
-      const eventBus = new EventTarget();
+      const eventBus = new EventBus();
       class Example {
         @dispatch({ eventName: "eventA", eventBus })
         eventA() {

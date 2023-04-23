@@ -49,7 +49,7 @@ npm publish
 - [x] Add tests & code coverage
 - [x] Add .github/{ISSUE|PULL_REQUEST}
 - [ ] Changelog & Github Releases
-- [ ] Isomorphic support
+- [x] Isomorphic support
 - [x] Code coverage shield
 - [ ] Features
     - [-] @on/dispatch on functions -- not possible
