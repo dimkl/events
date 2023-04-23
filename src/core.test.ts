@@ -584,5 +584,34 @@ describe("core", () => {
         [expect.objectContaining({ data: "res exampleb:eventB" })],
       ]);
     });
+
+    test("dispatch event calls other instance method (on method)", async () => {
+      class Example {
+        @dispatch({ eventName: "eventA" })
+        eventA() {
+          this.helperMethod();
+          return "res eventA";
+        }
+
+        helperMethod() { }
+      }
+
+      const dispatcherSpy = jest.fn();
+      globalEventBus.addEventListener("eventA", dispatcherSpy);
+
+      expect(dispatcherSpy).not.toBeCalled();
+
+      const e = new Example();
+      e.eventA();
+
+      // wait for the Promise used in dispatching events
+      await new Promise((res) => setTimeout(res, 1));
+
+      expect(dispatcherSpy).toBeCalledTimes(1);
+      expect(dispatcherSpy.mock.calls).toMatchObject([
+        [expect.objectContaining({ data: "res eventA" })]
+      ]);
+    });
+
   });
 });
