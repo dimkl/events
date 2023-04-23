@@ -37,8 +37,9 @@ export const dispatch = ({
   const dispatcher: DecoratorType = (target, propertyKey, descriptor) => {
     const event = eventName || generateEventName(target, propertyKey, "");
 
-    const wrapperFn = (...args: any[]): typeof descriptor.value => {
+    function wrapperFn(...args: any[]): typeof descriptor.value {
       // When static method use null and when instance method use this
+      // @ts-ignore
       const applyTarget = isInstanceMethod(target) ? this : null;
       const result = descriptor.value.apply(applyTarget, args);
       Promise.resolve(result).then((data) => {
@@ -47,9 +48,7 @@ export const dispatch = ({
       return result;
     };
 
-    // When static method use target and when instance method use this
-    const propertyTarget = isInstanceMethod(target) ? this : target;
-    Object.defineProperty(propertyTarget, propertyKey, {
+    Object.defineProperty(target, propertyKey, {
       value: wrapperFn,
       configurable: true,
       writable: true,
