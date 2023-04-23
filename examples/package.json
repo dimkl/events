@@ -5,13 +5,13 @@
   "scripts": {
     "event-options": "ts-ode event-options.ts",
     "implicit-event-attach": "ts-node implicit-event-attach.ts",
-    "isolated-event-bus": "ts-node implicit-event-attach.ts",
+    "isolated-event-bus": "ts-node isolated-event-bus.ts",
     "minimal": "ts-node minimal.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dimkl/events": "^1.4.4"
+    "@dimkl/events": "^2.0.0-beta.1"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
