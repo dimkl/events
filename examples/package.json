@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Examples",
   "scripts": {
-    "event-options": "ts-ode event-options.ts",
+    "event-options": "ts-node event-options.ts",
     "implicit-event-attach": "ts-node implicit-event-attach.ts",
     "isolated-event-bus": "ts-node isolated-event-bus.ts",
     "minimal": "ts-node minimal.ts"
