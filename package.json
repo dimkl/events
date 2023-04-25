@@ -21,6 +21,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "npm run build",
+    "preversion": "npm test",
     "test": "jest",
     "setup:examples": "yalc publish && cd examples/ && yalc add @dimkl/events && npm i && cd ../ && yalc push"
   },
