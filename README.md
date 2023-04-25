@@ -48,6 +48,25 @@ npm version {patch|minor|major}
 npm publish
 ```
 
+## Injecting events types
+
+The injected event types will be used with `@on` decorator methods and they should be 
+defined using interface merging strategy. Example:
+```typescript
+declare global {
+  interface {{eventName}}Event extends IEvent {
+    type: "{{eventName}}"
+    data?: {{any_data_type}}
+  }
+
+  interface Events {
+    "{{eventName}}": {{eventName}}Event
+  }
+}
+```
+
+You can also check the `ErrorEvent` definition in codebase.
+
 ## Roadmap
 
 - [x] Add tests & code coverage
@@ -60,7 +79,7 @@ npm publish
     - [x] @on/dispatch on class
     - [x] @on/dispatch for static & instance methods
     - [ ] remove event(s) on eventBus
-    - [ ] inject events and add event types
+    - [x] inject events and event types
 - [ ] Github action to publish (if test pass & coverage not affected)
     - [ ] on chore -> patch
     - [ ] on fix -> patch

@@ -1,7 +1,18 @@
 import { debounce } from "./utils";
 import type { IEventBus } from "./eventBus";
 import { globalEventBus } from "./eventBus";
+import type { IEvent } from "./customEvent";
 import { CustomEvent } from "./customEvent";
+
+declare global {
+  interface ErrorEvent extends IEvent {
+    type: "error"
+    data?: Error
+  }
+  interface Events {
+    "error": ErrorEvent
+  }
+}
 
 type DecoratorType = (
   target: any,
@@ -16,7 +27,7 @@ type DecoratorReturnFnType = (
 ) => any;
 
 type BaseParams = {
-  eventName?: string;
+  eventName?: keyof Events;
   eventBus?: IEventBus;
 };
 
@@ -94,7 +105,7 @@ export const on = ({
   const onMethod: DecoratorType = (target, propertyKey, descriptor) => {
     const event = eventName || generateEventName(target, propertyKey, "Handler");
 
-    let eventHandler = (evt: unknown) => {
+    let eventHandler = (evt: IEvent) => {
       try {
         // When static method use null and when instance method use this
         const applyTarget = isInstanceMethod(target) ? this : null;

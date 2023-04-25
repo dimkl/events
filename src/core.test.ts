@@ -1,6 +1,36 @@
 import { on, dispatch } from "./core";
 import { EventBus, globalEventBus } from "./eventBus";
 import { CustomEvent } from "./customEvent";
+import type { IEvent } from "./customEvent";
+
+declare global {
+  interface EventA extends IEvent {
+    type: "eventA"
+    data?: any
+  }
+
+  interface EventB extends IEvent {
+    type: "eventB"
+    data?: any
+  }
+
+  interface EventC extends IEvent {
+    type: "eventC"
+    data?: any
+  }
+
+  interface EventD extends IEvent {
+    type: "eventD"
+    data?: any
+  }
+
+  interface Events {
+    "eventA": EventA
+    "eventB": EventB
+    "eventC": EventC
+    "eventD": EventD
+  }
+}
 
 describe("core", () => {
   describe("@on()", () => {
