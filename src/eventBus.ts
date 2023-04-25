@@ -1,7 +1,7 @@
 import type { IEvent } from './customEvent';
 
 interface EventHandler {
-    (event: unknown): void
+    (event: IEvent): void
 }
 
 export interface IEventBus {
