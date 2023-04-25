@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@dimkl/events": "^2.0.0-beta.1"
+    "@dimkl/events": "file:.yalc/@dimkl/events"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",

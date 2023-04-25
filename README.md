@@ -24,6 +24,10 @@ Examples can be found in `examples/` folder:
 - [Isolated event bus example](./examples/isolated-event-bus.ts)
 - [Minimal implicit event attachment (with options) example](./examples/event-options.ts)
 
+### Use examples
+
+Execute `npm run setup:examples`
+
 ## Testing
 
 [![codecov](https://codecov.io/gh/dimkl/events/branch/main/graph/badge.svg?token=VHYWTFBNHB)](https://codecov.io/gh/dimkl/events)
