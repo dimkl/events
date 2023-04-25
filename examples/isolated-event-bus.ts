@@ -1,6 +1,30 @@
-import type { CustomEvent } from "@dimkl/events";
+import type { CustomEvent, IEvent } from "@dimkl/events";
 import { dispatch, on } from "@dimkl/events";
 import { EventBus } from "@dimkl/events";
+
+declare global {
+  interface PersonGetFullName extends IEvent {
+    type: "person:getFullName"
+    data?: any
+  }
+  
+  interface PersonSayAloha extends IEvent {
+    type: "person:sayAloha"
+    data?: any
+  }
+
+  interface PersonAsyncGetFullName extends IEvent {
+    type: "person:asyncGetFullName"
+    data?: any
+  }
+
+  interface Events {
+    "person:getFullName": PersonGetFullName
+    "person:sayAloha": PersonSayAloha
+    "person:asyncGetFullName": PersonAsyncGetFullName
+  }
+}
+
 
 //
 // Definition example

@@ -1,4 +1,4 @@
-import type { CustomEvent } from "@dimkl/events";
+import type { CustomEvent, IEvent } from "@dimkl/events";
 import { dispatch, on } from "@dimkl/events";
 
 //
@@ -39,6 +39,16 @@ class Person {
   }
 }
 
+declare global {
+  interface PersonSayAloha2 extends IEvent {
+    type: "person:sayAloha2"
+    data?: any
+  }
+  interface Events {
+    "person:sayAloha2": PersonSayAloha2
+  }
+}
+
 class PersonHandler {
   @on({ debounceMs: 200 })
   static getFullName(event: CustomEvent) {
@@ -59,7 +69,7 @@ class PersonHandler {
     eventName: "person:sayAloha2",
     errorHandler: console.error,
   })
-  static sayAloha2WithError(event: CustomEvent) {
+  static sayAloha2WithError(event: PersonSayAloha2) {
     throw new Error(`sayAloha2WithError: ${event.data}`);
   }
 }
