@@ -1,10 +1,11 @@
 import type { CustomEvent } from "@dimkl/events";
 import { dispatch, on } from "@dimkl/events";
+import { EventBus } from "@dimkl/events";
 
 //
 // Definition example
 //
-const eventBus = new EventTarget();
+const eventBus = new EventBus();
 
 class IsolatedPerson {
   public firstName: string;
