@@ -66,7 +66,7 @@ npm publish
     - [ ] on fix -> patch
     - [ ] on feat -> minor
     - [ ] on fix|feat with (BREAKING CHANGE) -> major
-- [ ] Support react-native (EventTarget is not supported)
+- [x] Support react-native (EventTarget is not supported)
 
 ## Contributing
 
