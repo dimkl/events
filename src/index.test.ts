@@ -2,6 +2,6 @@ import * as modules from "./index";
 
 describe("index", () => {
   test("verified exports of module", () => {
-    expect(Object.keys(modules)).toMatchSnapshot();
+    expect(Object.keys(modules).sort()).toMatchSnapshot();
   });
 });
