@@ -39,6 +39,7 @@ npm test
 ```
 
 ## Support
+
 For feature request or issues contact me via [email](mailto:dimitris.klouvas@gmail.com) or open an issue in repo
 
 ## Publish
@@ -50,7 +51,7 @@ npm publish
 
 ## Injecting events types
 
-The injected event types will be used with `@on` decorator methods and they should be 
+The injected event types will be used with `@on` decorator methods and they should be
 defined using interface merging strategy. Example:
 ```typescript
 declare global {
@@ -75,7 +76,7 @@ You can also check the `ErrorEvent` definition in codebase.
 - [x] Isomorphic support
 - [x] Code coverage shield
 - [ ] Features
-    - [-] @on/dispatch on functions -- not possible
+    - [x] @on/dispatch on functions -- not possible
     - [x] @on/dispatch on class
     - [x] @on/dispatch for static & instance methods
     - [ ] remove event(s) on eventBus
