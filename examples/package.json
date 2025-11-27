@@ -3,21 +3,19 @@
   "version": "1.0.0",
   "description": "Examples",
   "scripts": {
-    "event-options": "ts-node event-options.ts",
-    "implicit-event-attach": "ts-node implicit-event-attach.ts",
-    "isolated-event-bus": "ts-node isolated-event-bus.ts",
-    "minimal": "ts-node minimal.ts"
+    "event-options": "tsx event-options.ts",
+    "implicit-event-attach": "tsx implicit-event-attach.ts",
+    "isolated-event-bus": "tsx isolated-event-bus.ts",
+    "minimal": "tsx minimal.ts"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@dimkl/events": "file:.yalc/@dimkl/events"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "ts-node": "^10.9.1",
+    "tsx": "^4.20.6",
     "typescript": "^4.9.5"
   },
   "engines": {
-    "node": ">=16.18"
+    "node": ">=20.19.6"
   }
 }

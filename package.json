@@ -29,15 +29,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.19.25",
     "rimraf": "^6.1.2",
-    "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2",
+    "ts-jest": "^29.4.5",
     "typescript": "^5.7.3",
     "yalc": "^1.0.0-pre.53"
   },
   "engines": {
-    "node": ">=18.17"
+    "node": ">=20.19.6"
   },
   "repository": {
     "type": "git",

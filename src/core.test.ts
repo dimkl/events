@@ -223,7 +223,7 @@ describe("core", () => {
 
       expect(listenerSpy.mock.calls).toMatchSnapshot();
       expect(errorHandlerSpy.mock.calls).toMatchSnapshot();
-      expect(errorSpy).toBeCalledTimes(1);
+      expect(errorSpy).toHaveBeenCalledTimes(1);
       expect(errorSpy.mock.calls[0]).toMatchObject([
         {
           data: expect.objectContaining({ message: "err exampleerror:eventB" }),
@@ -376,7 +376,7 @@ describe("core", () => {
       globalEventBus.addEventListener("exampleb:eventA", dispatcherSpy);
       globalEventBus.addEventListener("exampleb:eventB", dispatcherSpy);
 
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       e.eventA();
@@ -388,7 +388,7 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(4);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res example:eventA" })],
         [expect.objectContaining({ data: "res example:eventB" })],
@@ -428,7 +428,7 @@ describe("core", () => {
       globalEventBus.addEventListener("eventC", dispatcherSpy);
       globalEventBus.addEventListener("eventD", dispatcherSpy);
 
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       e.eventA();
@@ -440,7 +440,7 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(4);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res eventA" })],
         [expect.objectContaining({ data: "res eventB" })],
@@ -487,8 +487,8 @@ describe("core", () => {
       eventBus.addEventListener("exampleb:eventA", dispatcherSpy);
       eventBus.addEventListener("exampleb:eventB", dispatcherSpy);
 
-      expect(globalDispatcherSpy).not.toBeCalled();
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(globalDispatcherSpy).not.toHaveBeenCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       e.eventA();
@@ -500,13 +500,13 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(globalDispatcherSpy).toBeCalledTimes(2);
+      expect(globalDispatcherSpy).toHaveBeenCalledTimes(2);
       expect(globalDispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res eventB" })],
         [expect.objectContaining({ data: "res exampleb:eventB" })],
       ]);
 
-      expect(dispatcherSpy).toBeCalledTimes(2);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(2);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res eventA" })],
         [expect.objectContaining({ data: "res exampleb:eventA" })],
@@ -542,7 +542,7 @@ describe("core", () => {
       globalEventBus.addEventListener("exampleb:eventA", dispatcherSpy);
       globalEventBus.addEventListener("exampleb:eventB", dispatcherSpy);
 
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       e.eventA();
@@ -554,7 +554,7 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(4);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res example:eventA" })],
         [expect.objectContaining({ data: "res example:eventB" })],
@@ -594,7 +594,7 @@ describe("core", () => {
       globalEventBus.addEventListener("exampleb:eventA", dispatcherSpy);
       globalEventBus.addEventListener("exampleb:eventB", dispatcherSpy);
 
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       Example.eventA();
@@ -606,7 +606,7 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(dispatcherSpy).toBeCalledTimes(4);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(4);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res example:eventA" })],
         [expect.objectContaining({ data: "res example:eventB" })],
@@ -629,7 +629,7 @@ describe("core", () => {
       const dispatcherSpy = jest.fn();
       globalEventBus.addEventListener("eventA", dispatcherSpy);
 
-      expect(dispatcherSpy).not.toBeCalled();
+      expect(dispatcherSpy).not.toHaveBeenCalled();
 
       const e = new Example();
       e.eventA();
@@ -637,7 +637,7 @@ describe("core", () => {
       // wait for the Promise used in dispatching events
       await new Promise((res) => setTimeout(res, 1));
 
-      expect(dispatcherSpy).toBeCalledTimes(1);
+      expect(dispatcherSpy).toHaveBeenCalledTimes(1);
       expect(dispatcherSpy.mock.calls).toMatchObject([
         [expect.objectContaining({ data: "res eventA" })]
       ]);

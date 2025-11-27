@@ -13,5 +13,4 @@
     "sourceMap": true,
     "module": "commonjs"
   },
-  "ts-node": { "esm": true }
 }
