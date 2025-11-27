@@ -12,7 +12,7 @@ npm install @dimkl/events
 
 ## Requirements & limitations
 
-- node >= 16
+- node >= 20
 - typescript decorators support enabled in tsconfig using `"experimentalDecorators": true`
 
 ## Usage
